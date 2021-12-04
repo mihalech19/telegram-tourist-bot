@@ -1,2 +1,11 @@
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+    }
+}
+
 rootProject.name = 'telegram-tourist-bot'
 
+include ':bot'
+include ':city-model'
+include ':bot-api'

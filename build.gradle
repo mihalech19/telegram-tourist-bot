@@ -1,14 +1,14 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.5.31'
+    id 'idea'
+    id 'org.jetbrains.kotlin.jvm' version '1.6.0'
+
 }
 
 group 'org.mihalech19'
 version '1.0-SNAPSHOT'
 
-repositories {
-    mavenCentral()
+allprojects{
+    apply plugin: 'idea'
+    apply plugin: 'kotlin'
 }
 
-dependencies {
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.5.31'
-}
