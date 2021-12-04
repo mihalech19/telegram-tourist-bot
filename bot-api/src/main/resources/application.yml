@@ -1,6 +1,4 @@
-server.port: 8081
-
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/touristbot
+      uri: mongodb://db:27017/touristbot

@@ -8,6 +8,7 @@ import org.springframework.context.event.EventListener
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage
 import reactor.core.Disposable
 import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
 import reactor.core.scheduler.Schedulers
 
 class DefaultMessageProcessor(
@@ -38,14 +39,16 @@ class DefaultMessageProcessor(
             )
           }
           .doOnNext { log.info("Answer sent to ChatId : ${it.chatId}") }
-          .onErrorContinue { e, _ ->
+          .onErrorResume { e ->
             log.error("An error occurred while processing the message:  \"$message\"", e)
+            Mono.empty()
           }
       }
       .doOnError { e ->
         log.error(e)
       }
       .doOnTerminate { log.info("Message processor was terminated") }
+      .retry()
       .subscribeOn(Schedulers.boundedElastic())
       .start()
   }

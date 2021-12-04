@@ -1,0 +1,19 @@
+services:
+  db:
+    image: mongo:4.4.10
+    ports:
+        - "27018:27017"
+    volumes:
+        - ./db:/data/db
+     
+  bot-api:
+    build: 
+        context: ..\bot-api\build\docker
+    ports:
+        - "8080:8080"
+  bot:
+    environment:
+        - BOT_NAME=mihalech19_tourist_bot
+        - BOT_TOKEN=
+    build: 
+        context: ..\bot\build\docker

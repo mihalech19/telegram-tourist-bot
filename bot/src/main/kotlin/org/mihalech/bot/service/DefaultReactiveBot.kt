@@ -24,11 +24,10 @@ class DefaultReactiveBot(
 
   override fun onUpdateReceived(update: Update) {
     if (update.hasMessage()) {
-      val result = messageSink.tryEmitNext(update.message)
       log.info(
-        "An update ${update.updateId} was received from ChatId: ${update.message.chatId}. " +
-            "Status: $result"
+        "An update ${update.updateId} was received from ChatId: ${update.message.chatId}"
       )
+      messageSink.tryEmitNext(update.message)
     }
   }
 
